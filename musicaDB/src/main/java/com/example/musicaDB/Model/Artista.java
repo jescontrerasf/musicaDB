@@ -32,12 +32,13 @@ public class Artista {
 
     @Column(name = "edad")
     @Size(min = 1, max = 3, message = "La edad debe ser de 1 a 3 caracteres")
+    @Positive(message = "La edad debe ser un número positivo")
     @NotNull(message = "La edad del artista es obligatoria")
-    private String edad;
+    private Integer edad;
 
-    @Column(name = "activo")
+    @Column(name = "estado")
     @NotNull(message = "El estado del artista es obligatorio")
-    private Boolean activo;
+    private Boolean estado;
 
     @NotBlank(message = "El género musical es obligatorio")
     @Column(name = "genero_musical")
