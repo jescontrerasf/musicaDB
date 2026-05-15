@@ -123,4 +123,40 @@ public class ArtistaService {
             throw new RuntimeException("Error al buscar el artista por estado: " + e.getMessage());
         }
     }
+
+    //Ordenar por nombre artístico
+    public List<Artista> ordenarPorNombreArtistico() {
+        try {
+            return artistaRepository.ordenarPorNombreArtistico();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al ordenar los artistas por nombre artístico: " + e.getMessage());
+        }
+    }
+
+    //Ordenar por edad ascendente
+    public List<Artista> ordenarPorEdadAsc() {
+        try {
+            return artistaRepository.ordenarPorEdadAsc();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al ordenar los artistas por edad ascendente: " + e.getMessage());
+        }
+    }
+
+    //Ordenar por edad descendente
+    public List<Artista> ordenarPorEdadDesc() {
+        try {
+            return artistaRepository.ordenarPorEdadDesc();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al ordenar los artistas por edad descendente: " + e.getMessage());
+        }
+    }
+
+    //Ordenar por género musical
+    public List<Artista> ordenarPorGeneroMusical() {
+        try {
+            return artistaRepository.ordenarPorGeneroMusical();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al ordenar los artistas por género musical: " + e.getMessage());
+        }
+    }
 }

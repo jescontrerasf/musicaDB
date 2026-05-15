@@ -33,10 +33,33 @@ public interface ArtistaRepository extends JpaRepository<Artista, Long> {
     @Query("SELECT a FROM Artista a WHERE a.nombreArtista = :nombre")
     List<Artista> findByNombre(@Param("nombre") String nombre);
 
-    //Tipo 3 Native Query
-    //Buscar artistas por edad
-    @Query(
-        value = "SELECT * FROM artista WHERE edad = :edad", 
-        nativeQuery = true)
+    //Buscar artista por edad
+    @Query("SELECT a FROM Artista a WHERE a.edad = :edad")
     List<Artista> findByEdad(@Param("edad") Integer edad);
+    
+    //Tipo 3 Native Query
+    //Ordenar artistas por nombre artístico
+    @Query(
+        value = "SELECT * FROM artista ORDER BY nombre_artistico ASC", 
+        nativeQuery = true)
+    List<Artista> ordenarPorNombreArtistico();
+
+    //Ordenar por edad ascendente
+    @Query(
+        value = "SELECT * FROM artista ORDER BY edad ASC", 
+        nativeQuery = true)
+    List<Artista> ordenarPorEdadAsc();
+
+    //Ordenar por edad descendente
+    @Query(
+        value = "SELECT * FROM artista ORDER BY edad DESC", 
+        nativeQuery = true)
+    List<Artista> ordenarPorEdadDesc();
+
+    //Ordenar por genero musical
+    @Query(
+        value = "SELECT * FROM artista ORDER BY genero_musical ASC", 
+        nativeQuery = true)
+    List<Artista> ordenarPorGeneroMusical();
+
 }
