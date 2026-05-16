@@ -20,7 +20,8 @@ public class ArtistaRequestDTO {
     @NotBlank(message = "La nacionalidad del artista es obligatoria")
     private String nacionalidadArtista;
 
-    @Size(min = 1, max = 3, message = "La edad debe ser de 1 a 3 caracteres")
+    @Min(value = 1, message = "La edad debe ser mayor o igual a 1")
+    @Max(value = 100, message = "La edad debe ser menor o igual a 100")
     @Positive(message = "La edad debe ser un número positivo")
     @NotNull(message = "La edad del artista es obligatoria")
     private Integer edad;
