@@ -46,8 +46,6 @@ public class MusicaService {
         musicaRepository.deleteById(id);
     }
 
-    // ---- Query Methods ----
-
     public List<Musica> buscarPorNombreMusica(String nombreMusica) {
         return musicaRepository.findByNombreMusicaContainingIgnoreCase(nombreMusica);
     }
@@ -55,8 +53,6 @@ public class MusicaService {
     public List<Musica> buscarPorGeneroMusical(String generoMusical) {
         return musicaRepository.findByGeneroMusicalIgnoreCase(generoMusical);
     }
-
-    // ---- JPQL ----
 
     public List<Musica> buscarPorArtista(String artista) {
         return musicaRepository.buscarPorArtista(artista);
@@ -66,7 +62,6 @@ public class MusicaService {
         return musicaRepository.ordenarPorDuracionDesc();
     }
 
-    // ---- Native Query ----
 
     public List<Musica> buscarPorAlbum(String album) {
         return musicaRepository.buscarPorAlbumNative(album);
