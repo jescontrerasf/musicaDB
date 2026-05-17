@@ -1,11 +1,14 @@
 package com.example.musicaDB.service;
 
+import com.example.musicaDB.dto.MusicaRequestDTO;
+import com.example.musicaDB.dto.MusicaResponseDTO;
 import com.example.musicaDB.model.Musica;
 import com.example.musicaDB.repository.MusicaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MusicaService {
@@ -16,58 +19,97 @@ public class MusicaService {
         this.musicaRepository = musicaRepository;
     }
 
-    public Musica guardar(Musica musica) {
-        return musicaRepository.save(musica);
+    // --- Mapeos ---
+
+    private Musica toEntity(MusicaRequestDTO dto) {
+        Musica musica = new Musica();
+        musica.setNombreMusica(dto.getNombreCancion());
+        musica.setArtista(dto.getArtista());
+        musica.setAlbum(dto.getAlbum());
+        musica.setGeneroMusical(dto.getGeneroMusical());
+        musica.setDuracion(dto.getDuracion());
+        musica.setFechaPublicacion(dto.getFechaPublicacion());
+        return musica;
     }
 
-    public Optional<Musica> buscarPorId(Long id) {
-        return musicaRepository.findById(id);
+    private MusicaResponseDTO toDTO(Musica musica) {
+        return new MusicaResponseDTO(
+            musica.getIdMusica(),
+            musica.getNombreMusica(),
+            musica.getArtista(),
+            musica.getAlbum(),
+            musica.getGeneroMusical(),
+            musica.getDuracion(),
+            musica.getFechaPublicacion()
+        );
     }
 
-    public List<Musica> listarTodos() {
-        return musicaRepository.findAll();
+    // --- CRUD base ---
+
+    public MusicaResponseDTO guardar(MusicaRequestDTO dto) {
+        return toDTO(musicaRepository.save(toEntity(dto)));
     }
 
-    public Musica actualizar(Long id, Musica musica) {
+    public Optional<MusicaResponseDTO> buscarPorId(Long id) {
+        return musicaRepository.findById(id).map(this::toDTO);
+    }
+
+    public List<MusicaResponseDTO> listarTodos() {
+        return musicaRepository.findAll()
+                .stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    public MusicaResponseDTO actualizar(Long id, MusicaRequestDTO dto) {
         Musica existente = musicaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontro una cancion con el id: " + id));
+                .orElseThrow(() -> new RuntimeException("Música no encontrada con id: " + id));
 
-        existente.setNombreMusica(musica.getNombreMusica());
-        existente.setArtista(musica.getArtista());
-        existente.setAlbum(musica.getAlbum());
-        existente.setGeneroMusical(musica.getGeneroMusical());
-        existente.setDuracion(musica.getDuracion());
-        existente.setFechaPublicacion(musica.getFechaPublicacion());
+        existente.setNombreMusica(dto.getNombreCancion());
+        existente.setArtista(dto.getArtista());
+        existente.setAlbum(dto.getAlbum());
+        existente.setGeneroMusical(dto.getGeneroMusical());
+        existente.setDuracion(dto.getDuracion());
+        existente.setFechaPublicacion(dto.getFechaPublicacion());
 
-        return musicaRepository.save(existente);
+        return toDTO(musicaRepository.save(existente));
     }
 
     public void eliminar(Long id) {
         musicaRepository.deleteById(id);
     }
 
-    public List<Musica> buscarPorNombreMusica(String nombreMusica) {
-        return musicaRepository.findByNombreMusicaContainingIgnoreCase(nombreMusica);
+    // --- Query Methods ---
+
+    public List<MusicaResponseDTO> buscarPorNombreMusica(String nombreMusica) {
+        return musicaRepository.findByNombreMusicaContainingIgnoreCase(nombreMusica)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<Musica> buscarPorGeneroMusical(String generoMusical) {
-        return musicaRepository.findByGeneroMusicalIgnoreCase(generoMusical);
+    public List<MusicaResponseDTO> buscarPorGeneroMusical(String generoMusical) {
+        return musicaRepository.findByGeneroMusicalIgnoreCase(generoMusical)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<Musica> buscarPorArtista(String artista) {
-        return musicaRepository.buscarPorArtista(artista);
+    // --- JPQL ---
+
+    public List<MusicaResponseDTO> buscarPorArtista(String artista) {
+        return musicaRepository.buscarPorArtista(artista)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<Musica> ordenarPorDuracionDesc() {
-        return musicaRepository.ordenarPorDuracionDesc();
+    public List<MusicaResponseDTO> ordenarPorDuracionDesc() {
+        return musicaRepository.ordenarPorDuracionDesc()
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    // --- Native Query ---
 
-    public List<Musica> buscarPorAlbum(String album) {
-        return musicaRepository.buscarPorAlbumNative(album);
+    public List<MusicaResponseDTO> buscarPorAlbum(String album) {
+        return musicaRepository.buscarPorAlbumNative(album)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<Musica> ordenarPorFechaPublicacionAsc() {
-        return musicaRepository.ordenarPorFechaPublicacionAscNative();
+    public List<MusicaResponseDTO> ordenarPorFechaPublicacionAsc() {
+        return musicaRepository.ordenarPorFechaPublicacionAscNative()
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 }
