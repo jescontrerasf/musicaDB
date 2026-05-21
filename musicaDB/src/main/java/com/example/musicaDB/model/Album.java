@@ -1,7 +1,5 @@
 package com.example.musicaDB.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -25,9 +23,9 @@ public class Album {
 
     @PastOrPresent(message = "La fecha de publicación no puede ser en el futuro")
     @Column(name = "fecha_publicasion_album", nullable = false)
-    private LocalDate fechaPublicasionAlbum;
+    private String fechaPublicasionAlbum;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_artista", nullable = false)
     private Artista artista;
 }

@@ -2,11 +2,7 @@ package com.example.musicaDB.service;
 
 import com.example.musicaDB.dto.MusicaRequestDTO;
 import com.example.musicaDB.dto.MusicaResponseDTO;
-import com.example.musicaDB.model.Album;
-import com.example.musicaDB.model.Artista;
 import com.example.musicaDB.model.Musica;
-import com.example.musicaDB.repository.AlbumRepository;
-import com.example.musicaDB.repository.ArtistaRepository;
 import com.example.musicaDB.repository.MusicaRepository;
 
 import java.util.List;
@@ -20,8 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class MusicaService {
 
     private final MusicaRepository musicaRepository;
-    private final AlbumRepository albumRepository;
-    private final ArtistaRepository artistaRepository;
 
 
     // --- Mapeos ---
@@ -29,15 +23,8 @@ public class MusicaService {
     private Musica toEntity(MusicaRequestDTO dto) {
         Musica musica = new Musica();
         musica.setNombreMusica(dto.getNombreCancion());
-        Artista artista = artistaRepository.findByNombreArtisticoContainingIgnoreCase(dto.getArtista().getNombreArtistico())
-                .stream().findFirst()
-                .orElseThrow(() -> new RuntimeException("Artista no encontrado con el nombre: " + dto.getArtista()));
-
-        Album album = albumRepository.findByNombreAlbumContainingIgnoreCase(dto.getArtista())
-                .stream().findFirst()
-                .orElseThrow(() -> new RuntimeException("Artista no encontrado con el nombre: " + dto.getArtista()));
-        musica.setAlbum(album);
-        musica.setArtista(artista);
+        musica.setAlbum(dto.getAlbum().getNombreAlbum());
+        musica.setArtista(dto.getArtista().getNombreArtistico());
         musica.setGeneroMusical(dto.getGeneroMusical());
         musica.setDuracion(dto.getDuracion());
         musica.setFechaPublicacion(dto.getFechaPublicacion());
@@ -48,8 +35,8 @@ public class MusicaService {
         return new MusicaResponseDTO(
             musica.getIdMusica(),
             musica.getNombreMusica(),
-            musica.getArtista().getNombreArtistico(),
-            musica.getAlbum().getNombreAlbum(),
+            musica.getArtista(),
+            musica.getAlbum(),
             musica.getGeneroMusical(),
             musica.getDuracion(),
             musica.getFechaPublicacion()
@@ -76,8 +63,8 @@ public class MusicaService {
                 .orElseThrow(() -> new RuntimeException("Música no encontrada con id: " + id));
 
         existente.setNombreMusica(dto.getNombreCancion());
-        existente.setArtista(dto.getArtista());
-        existente.setAlbum(dto.getAlbum());
+        existente.setArtista(dto.getArtista().getNombreArtistico());
+        existente.setAlbum(dto.getAlbum().getNombreAlbum());
         existente.setGeneroMusical(dto.getGeneroMusical());
         existente.setDuracion(dto.getDuracion());
         existente.setFechaPublicacion(dto.getFechaPublicacion());

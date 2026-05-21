@@ -22,10 +22,10 @@ public class Musica {
     private String nombreMusica;
 
     @Column(name = "artista", nullable = false)
-    private Artista artista;
+    private String artista;
 
     @Column(name = "album", nullable = true)
-    private Album album;
+    private String album;
 
     @Column(name = "genero_musical", nullable = false)
     private String generoMusical;
