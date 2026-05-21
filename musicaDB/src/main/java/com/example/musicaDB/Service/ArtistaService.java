@@ -1,7 +1,7 @@
-package com.example.musicaDB.Service;
+package com.example.musicaDB.service;
 
-import com.example.musicaDB.Model.Artista;
-import com.example.musicaDB.Repository.ArtistaRepository;
+import com.example.musicaDB.model.Artista;
+import com.example.musicaDB.repository.ArtistaRepository;
 import com.example.musicaDB.dto.ArtistaResponseDTO;
 import com.example.musicaDB.dto.ArtistaRequestDTO;
 

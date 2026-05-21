@@ -2,7 +2,6 @@ package com.example.musicaDB.repository;
 
 import com.example.musicaDB.model.Album;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +15,7 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     //QUERY METHOD: Buscar álbum por nombre, ignorando mayúsculas/minúsculas
-    List<Album> findByNombreAlbumContainingIgnoreCase(String nombreAlbun);
+    List<Album> findByNombreAlbumContainingIgnoreCase(String nombreAlbum);
 
     //Buscar álbumes buscando por el nombre del artista (Navegando la relación)
     @Query("SELECT a FROM Album a WHERE LOWER(a.artista.nombreArtista) LIKE LOWER(CONCAT('%', :nombreArtista, '%'))")

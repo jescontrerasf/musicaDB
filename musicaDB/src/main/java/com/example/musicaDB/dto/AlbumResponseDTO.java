@@ -12,10 +12,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AlbumResponseDTO {
 
-    private Long idAlbun;
-    private String nombreAlbun;
+    private Long idAlbum;
+    private String nombreAlbum;
     private LocalDate fechaPublicasionAlbum;
-    //private Artista artista;
-
-
+    private String nombreArtista;
 }

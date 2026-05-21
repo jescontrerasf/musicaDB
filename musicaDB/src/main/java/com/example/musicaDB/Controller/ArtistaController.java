@@ -1,6 +1,6 @@
-package com.example.musicaDB.Controller;
+package com.example.musicaDB.controller;
 
-import com.example.musicaDB.Service.ArtistaService;
+import com.example.musicaDB.service.ArtistaService;
 import com.example.musicaDB.dto.ArtistaResponseDTO;
 import com.example.musicaDB.dto.ArtistaRequestDTO;
 

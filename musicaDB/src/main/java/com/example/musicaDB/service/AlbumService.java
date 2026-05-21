@@ -5,7 +5,7 @@ import com.example.musicaDB.dto.AlbumResponseDTO;
 import com.example.musicaDB.model.Album;
 import com.example.musicaDB.model.Artista;
 import com.example.musicaDB.repository.AlbumRepository;
-import com.example.musicaDB.Repository.ArtistaRepository; 
+import com.example.musicaDB.repository.ArtistaRepository; 
 
 import java.time.LocalDate;
 import java.util.List;

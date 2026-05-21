@@ -2,30 +2,42 @@ package com.example.musicaDB.service;
 
 import com.example.musicaDB.dto.MusicaRequestDTO;
 import com.example.musicaDB.dto.MusicaResponseDTO;
+import com.example.musicaDB.model.Album;
+import com.example.musicaDB.model.Artista;
 import com.example.musicaDB.model.Musica;
+import com.example.musicaDB.repository.AlbumRepository;
+import com.example.musicaDB.repository.ArtistaRepository;
 import com.example.musicaDB.repository.MusicaRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class MusicaService {
 
     private final MusicaRepository musicaRepository;
+    private final AlbumRepository albumRepository;
+    private final ArtistaRepository artistaRepository;
 
-    public MusicaService(MusicaRepository musicaRepository) {
-        this.musicaRepository = musicaRepository;
-    }
 
     // --- Mapeos ---
 
     private Musica toEntity(MusicaRequestDTO dto) {
         Musica musica = new Musica();
         musica.setNombreMusica(dto.getNombreCancion());
-        musica.setArtista(dto.getArtista());
-        musica.setAlbum(dto.getAlbum());
+        Artista artista = artistaRepository.findByNombreArtisticoContainingIgnoreCase(dto.getArtista().getNombreArtistico())
+                .stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("Artista no encontrado con el nombre: " + dto.getArtista()));
+
+        Album album = albumRepository.findByNombreAlbumContainingIgnoreCase(dto.getArtista())
+                .stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("Artista no encontrado con el nombre: " + dto.getArtista()));
+        musica.setAlbum(album);
+        musica.setArtista(artista);
         musica.setGeneroMusical(dto.getGeneroMusical());
         musica.setDuracion(dto.getDuracion());
         musica.setFechaPublicacion(dto.getFechaPublicacion());
@@ -36,8 +48,8 @@ public class MusicaService {
         return new MusicaResponseDTO(
             musica.getIdMusica(),
             musica.getNombreMusica(),
-            musica.getArtista(),
-            musica.getAlbum(),
+            musica.getArtista().getNombreArtistico(),
+            musica.getAlbum().getNombreAlbum(),
             musica.getGeneroMusical(),
             musica.getDuracion(),
             musica.getFechaPublicacion()

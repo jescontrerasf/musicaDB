@@ -1,6 +1,6 @@
-package com.example.musicaDB.Repository;
+package com.example.musicaDB.repository;
 
-import com.example.musicaDB.Model.Artista;
+import com.example.musicaDB.model.Artista;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -61,5 +61,4 @@ public interface ArtistaRepository extends JpaRepository<Artista, Long> {
         value = "SELECT * FROM artista ORDER BY genero_musical ASC", 
         nativeQuery = true)
     List<Artista> ordenarPorGeneroMusical();
-
 }
