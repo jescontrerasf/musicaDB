@@ -1,4 +1,4 @@
-package com.example.musicaDB.Model;
+package com.example.musicaDB.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
