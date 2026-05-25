@@ -1,13 +1,12 @@
 package com.example.musicaDB.repository;
 
-import com.example.musicaDB.model.Artista;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import com.example.musicaDB.model.Artista;
 
 @Repository
 public interface ArtistaRepository extends JpaRepository<Artista, Long> {
