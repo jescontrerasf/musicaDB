@@ -1,8 +1,5 @@
 package com.example.musicaDB.dto;
 
-import com.example.musicaDB.model.Album;
-import com.example.musicaDB.model.Artista;
-
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +15,9 @@ public class MusicaRequestDTO {
     private String nombreCancion;
 
     @NotBlank(message = "El nombre del artista es obligatorio")
-    private Artista artista;
+    private String artista;
 
-    private Album album;
+    private String album;
 
     @NotBlank(message = "La cancion debe pertenecer a un genero musical")
     private String generoMusical;

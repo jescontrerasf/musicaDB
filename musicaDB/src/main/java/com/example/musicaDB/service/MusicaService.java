@@ -23,8 +23,8 @@ public class MusicaService {
     private Musica toEntity(MusicaRequestDTO dto) {
         Musica musica = new Musica();
         musica.setNombreMusica(dto.getNombreCancion());
-        musica.setAlbum(dto.getAlbum().getNombreAlbum());
-        musica.setArtista(dto.getArtista().getNombreArtistico());
+        musica.setAlbum(dto.getAlbum());
+        musica.setArtista(dto.getArtista());
         musica.setGeneroMusical(dto.getGeneroMusical());
         musica.setDuracion(dto.getDuracion());
         musica.setFechaPublicacion(dto.getFechaPublicacion());
@@ -63,8 +63,8 @@ public class MusicaService {
                 .orElseThrow(() -> new RuntimeException("Música no encontrada con id: " + id));
 
         existente.setNombreMusica(dto.getNombreCancion());
-        existente.setArtista(dto.getArtista().getNombreArtistico());
-        existente.setAlbum(dto.getAlbum().getNombreAlbum());
+        existente.setArtista(dto.getArtista());
+        existente.setAlbum(dto.getAlbum());
         existente.setGeneroMusical(dto.getGeneroMusical());
         existente.setDuracion(dto.getDuracion());
         existente.setFechaPublicacion(dto.getFechaPublicacion());

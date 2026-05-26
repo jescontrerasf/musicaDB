@@ -18,7 +18,7 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     List<Album> findByNombreAlbumContainingIgnoreCase(String nombreAlbum);
 
     //Buscar álbumes buscando por el nombre del artista (Navegando la relación)
-    @Query("SELECT a FROM Album a WHERE LOWER(a.artista.nombreArtista) LIKE LOWER(CONCAT('%', :nombreArtista, '%'))")
+    @Query("SELECT a FROM Album a WHERE LOWER(a.artista.nombreArtista) LIKE LOWER(CONCAT('%', :nombreArtista, '%')) OR LOWER(a.artista.nombreArtistico) LIKE LOWER(CONCAT('%', :nombreArtista, '%'))")
     List<Album> buscarPorNombreDeArtista(@Param("nombreArtista") String nombreArtista);
 
     //Buscar álbumes publicados desde una fecha específica en adelante

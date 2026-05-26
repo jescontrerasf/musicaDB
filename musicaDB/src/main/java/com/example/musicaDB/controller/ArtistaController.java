@@ -129,6 +129,16 @@ public class ArtistaController {
         }
     }
 
+    //Buscar por nombre
+    @GetMapping("/buscar/nombre")
+    public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre) {
+        try {
+            return ResponseEntity.ok(artistaService.buscarPorNombre(nombre));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     //Ordenar por nombre artístico
     @GetMapping("/ordenar/nombreArt")
     public ResponseEntity<?> ordenarPorNombreArtistico() {
