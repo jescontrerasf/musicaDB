@@ -1,8 +1,8 @@
 # MusicaDB
 ## Integrantes
 Guillermo Miranda | Microservicio Artista |
-Vicente [Apellido] | Microservicio Album |
-Jesús [Apellido] | Microservicio Musica |
+Jesús Contreras | Microservicio Album |
+Vicente Zuniga| Microservicio Musica |
 
 ## Tecnologías utilizadas
 - Java 17
