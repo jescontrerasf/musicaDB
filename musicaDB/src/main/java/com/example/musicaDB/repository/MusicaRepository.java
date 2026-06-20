@@ -5,11 +5,11 @@ import com.example.musicaDB.model.Musica;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
-@Repository
+
 public interface MusicaRepository extends JpaRepository<Musica, Long>{
 
     // Buscar música por nombre, ignorando mayúsculas/minúsculas

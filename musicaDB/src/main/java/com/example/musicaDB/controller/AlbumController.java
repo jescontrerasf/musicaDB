@@ -4,6 +4,8 @@ import com.example.musicaDB.dto.AlbumRequestDTO;
 import com.example.musicaDB.dto.AlbumResponseDTO;
 import com.example.musicaDB.service.AlbumService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/album")
+@Tag(name = "Albumes", description = "Operaciones de los albumes")
 public class AlbumController {
 
     private final AlbumService albumService;
@@ -38,6 +41,7 @@ public class AlbumController {
     }
 
     @GetMapping
+    @Operation(summary = "Obtener todos los albumes", description = "Se obtiene una lista de los albumes")
     public ResponseEntity<List<AlbumResponseDTO>> listarTodos() {
         return ResponseEntity.ok(albumService.listarTodos());
     }
