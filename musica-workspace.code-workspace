@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "🎵 musicaDB (microservicio)",
+      "path": "musicaDB"
+    },
+    {
+      "name": "🔍 eureka (servidor de descubrimiento)",
+      "path": "eureka"
+    },
+    {
+      "name": "🚪 gateway (enrutador)",
+      "path": "gateway"
+    }
+  ],
+  "settings": {
+    "java.configuration.detectJdksAtStart": true,
+    "java.import.maven.enabled": true,
+    "java.autobuild.enabled": true
+  }
+}
