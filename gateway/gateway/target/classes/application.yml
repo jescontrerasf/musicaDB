@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev
+
+---
+# Perfil DESARROLLO
+spring:
+  config:
+    activate:
+      on-profile: dev
+  cloud:
+    gateway:
+      routes:
+        - id: musica-artistas
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/artistas/**
+
+        - id: musica-albumes
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/album/**
+
+        - id: musica-canciones
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/musica/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+---
+# Perfil PRODUCCIÓN
+spring:
+  config:
+    activate:
+      on-profile: prod
+  cloud:
+    gateway:
+      routes:
+        - id: musica-artistas
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/artistas/**
+
+        - id: musica-albumes
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/album/**
+
+        - id: musica-canciones
+          uri: lb://musica-db
+          predicates:
+            - Path=/api/musica/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: WARN
