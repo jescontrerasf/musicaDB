@@ -6,12 +6,20 @@ Vicente Zuniga| Microservicio Musica |
 
 ## Tecnologías utilizadas
 - Java 17
-- Spring Boot
+- Spring Boot 3
+- Spring Cloud (Gateway & Netflix Eureka)
 - Spring Data JPA + Hibernate
-- MySQL
-- Lombok
-- Bean Validation
-- Maven
+- MySQL 8
+- Docker & Docker Compose
+- Swagger / OpenAPI 3
+- Maven & Lombok
+
+## Listado de Microservicios Implementados
+El sistema se compone de los siguientes microservicios:
+1. **Eureka Server (`eureka`):** Servidor de descubrimiento de servicios. Opera en el puerto `8761`.
+2. **API Gateway (`api-gateway`):** Enrutador centralizado que expone los endpoints al exterior. Opera en el puerto `8080`.
+3. **MusicaDB Service (`musica-db`):** Microservicio principal que contiene la lógica de negocio y la conexión a la base de datos MySQL. Opera en el puerto `8081`.
+
 
 ## Requisitos previos
 - Extenciones de java y Spring Boot instaladas
