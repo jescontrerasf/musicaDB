@@ -1,15 +1,15 @@
 {
   "folders": [
     {
-      "name": "🎵 musicaDB (microservicio)",
+      "name": "musicaDB",
       "path": "musicaDB"
     },
     {
-      "name": "🔍 eureka (servidor de descubrimiento)",
+      "name": "Eureka",
       "path": "eureka"
     },
     {
-      "name": "🚪 gateway (enrutador)",
+      "name": "gateway",
       "path": "gateway"
     }
   ],
