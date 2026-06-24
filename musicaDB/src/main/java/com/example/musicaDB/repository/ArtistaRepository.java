@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+
 import com.example.musicaDB.model.Artista;
 
-@Repository
+
 public interface ArtistaRepository extends JpaRepository<Artista, Long> {
     
     //Tipo 1 QUERY METHODS

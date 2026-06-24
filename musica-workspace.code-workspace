@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "musicaDB",
+      "path": "musicaDB"
+    },
+    {
+      "name": "Eureka",
+      "path": "eureka"
+    },
+    {
+      "name": "gateway",
+      "path": "gateway"
+    }
+  ],
+  "settings": {
+    "java.configuration.detectJdksAtStart": true,
+    "java.import.maven.enabled": true,
+    "java.autobuild.enabled": true
+  }
+}

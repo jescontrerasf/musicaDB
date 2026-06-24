@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+  instance:
+    hostname: ${EUREKA_HOSTNAME:localhost}
