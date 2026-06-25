@@ -48,7 +48,7 @@ El sistema se compone de los siguientes microservicios:
 ```bash
 docker compose up --build
 ```
-5. La aplicación estará disponible en `http://localhost:8081`
+5. La aplicación estará disponible en `http://localhost:8081/swagger-ui/index.html`
 
 
 ## Ejecución sin Docker
