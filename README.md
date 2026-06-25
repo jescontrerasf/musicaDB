@@ -2,7 +2,7 @@
 ## Integrantes
 Guillermo Miranda | Microservicio Artista |
 Jesús Contreras | Microservicio Album |
-Vicente Zuniga| Microservicio Musica |
+Vicente Zuniga | Microservicio Musica |
 
 ## Tecnologías utilizadas
 - Java 17
@@ -13,32 +13,69 @@ Vicente Zuniga| Microservicio Musica |
 - Docker & Docker Compose
 - Swagger / OpenAPI 3
 - Maven & Lombok
+- JUnit 5 & Mockito (Testing)
 
 ## Listado de Microservicios Implementados
 El sistema se compone de los siguientes microservicios:
 1. **Eureka Server (`eureka`):** Servidor de descubrimiento de servicios. Opera en el puerto `8761`.
-2. **API Gateway (`api-gateway`):** Enrutador centralizado que expone los endpoints al exterior. Opera en el puerto `8080`.
-3. **MusicaDB Service (`musica-db`):** Microservicio principal que contiene la lógica de negocio y la conexión a la base de datos MySQL. Opera en el puerto `8081`.
+2. **API Gateway (`gateway`):** Enrutador centralizado que expone los endpoints al exterior. Opera en el puerto `8080`.
+3. **MusicaDB Service (`musicaDB`):** Microservicio principal que contiene la lógica de negocio y la conexión a la base de datos MySQL. Opera en el puerto `8081`.
 
+## Rutas principales del Gateway
+| Ruta Gateway | Destino | Descripción |
+|---|---|---|
+| `/api/artistas/**` | `musica-db:8081` | Endpoints del microservicio Artista |
+| `/api/album/**` | `musica-db:8081` | Endpoints del microservicio Album |
+| `/api/musica/**` | `musica-db:8081` | Endpoints del microservicio Musica |
+
+## Documentación Swagger / OpenAPI
+- **Local:** `http://localhost:8081/swagger-ui/index.html`
+- **Gateway:** `http://localhost:8080/swagger-ui/index.html`
 
 ## Requisitos previos
-- Extenciones de java y Spring Boot instaladas
-- MySQL corriendo en puerto `3306`
+- Docker Desktop instalado y corriendo
+- Puerto `3306`, `8080`, `8081` y `8761` disponibles
+- Abrir el Workspace para el levantamiento correcto del proyecto
 
-## Base de datos
-Crear la base de datos en MySQL:
-`CREATE DATABASE musica_DB;`
-
-## Configuración application.properties
-spring.datasource.url=jdbc:mysql://localhost:3306/musica_DB?useSSL=false&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=
-
-## Pasos para ejecutar
+## Ejecución con Docker
 1. Clonar el repositorio
-2. Entrar a la carpeta del proyecto
-3. Ejecutar el proyecto
-4. El proyecto corre en `http://localhost:8081`
+2. Entrar a la carpeta `musicaDB`
+3. Compilar el proyecto:
+```bash
+./mvnw clean package -DskipTests
+```
+4. Levantar los contenedores:
+```bash
+docker compose up --build
+```
+5. La aplicación estará disponible en `http://localhost:8081/swagger-ui/index.html`
+
+
+## Ejecución sin Docker
+1. Clonar el repositorio
+2. Crear la base de datos en MySQL:
+```sql
+CREATE DATABASE musica_DB;
+```
+3. Configurar `application.properties` con tus credenciales locales
+4. Ejecutar con:
+```bash
+./mvnw spring-boot:run
+```
+
+## Tests unitarios
+El proyecto incluye pruebas unitarias con JUnit 5 y Mockito para los tres servicios principales:
+
+| Clase de Test | Servicio probado |
+|---|---|
+| `MusicaServiceTest` | MusicaService |
+| `AlbumServiceTest` | AlbumService |
+| `ArtistaServiceTest` | ArtistaService |
+
+Para ejecutar los tests:
+```bash
+./mvnw test
+```
 
 ## Endpoints disponibles
 
@@ -89,8 +126,9 @@ spring.datasource.password=
 | GET | /api/musica/ordenar/duracion-desc | Ordenar por duración |
 | GET | /api/musica/ordenar/fecha-asc | Ordenar por fecha |
 
-#### Ejemplos para la ejecucion. `Seguir orden de creacion`
-## Crear artista 
+#### Ejemplos para la ejecución. `Seguir orden de creación`
+
+## Crear artista
 {
     "nombreArtista": "Benito Martinez",
     "nombreArtistico": "Bad Bunny",
@@ -98,7 +136,7 @@ spring.datasource.password=
     "edad": 30,
     "estado": true,
     "generoMusical": "Reggaeton"
-},
+}
 {
     "nombreArtista": "Christofer Velez",
     "nombreArtistico": "Chyste MC",
@@ -115,6 +153,7 @@ spring.datasource.password=
     "estado": false,
     "generoMusical": "Rock"
 }
+
 ## Crear Album
 {
     "nombreAlbum": "Un Verano Sin Ti",
@@ -131,6 +170,7 @@ spring.datasource.password=
     "fechaPublicasionAlbum": "1991-09-24",
     "artista": "Kurt Cobain"
 }
+
 ## Crear Cancion
 {
     "nombreCancion": "Tití Me Preguntó",

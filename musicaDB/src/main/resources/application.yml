@@ -1,19 +1,19 @@
 spring:
   application:
-    name: musica-db
+    name: musica_db
   profiles:
     active: dev
 
 ---
-# Perfil DESARROLLO
+# Perfil DEV
 spring:
   config:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/musicaDB
+    url: jdbc:mysql://localhost:3306/musica_DB
     username: root
-    password: tu_password
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -49,8 +49,8 @@ spring:
       on-profile: prod
   datasource:
     url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
-    username: ${DB_USER}
-    password: ${DB_PASS}
+    username: prod
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -72,3 +72,13 @@ springdoc:
     enabled: false
   api-docs:
     enabled: false
+---
+# Perfil DOCKER
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://mysql:3306/musica_DB
+    username: root
+    password: 
