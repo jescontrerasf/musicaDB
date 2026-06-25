@@ -40,7 +40,7 @@ public class AlbumController {
     @PostMapping
     @Operation(summary = "Crear un álbum", description = "Registra un nuevo álbum en la base de datos")
     @ApiResponses({
-        @ApiResponse(responseCode = "201", description = "Álbum creado exitosamente"),
+        @ApiResponse(responseCode = "200", description = "Álbum creado exitosamente"),
         @ApiResponse(responseCode = "400", description = "Datos inválidos en el cuerpo de la petición", content = @Content)
     })
     public ResponseEntity<EntityModel<AlbumResponseDTO>> guardar(
